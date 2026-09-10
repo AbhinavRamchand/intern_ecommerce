@@ -16,31 +16,53 @@ function Home() {
                 <div className="w-1/2 h-[600px]">
                     <img src="https://themewagon.github.io/kaira/images/single-image-2.jpg" alt="home-image"
                         className="w-full h-full object-cover" />
-
-
                 </div>
 
             </div>
 
-            <div className="my-[100px] mx-[60px] flex flex-col md:flex-row gap-10 justify-center items-center">
 
-                <div className="w-full md:w-1/3 h-[250px] bg-[#EAE9E5] hover:scale-105 transition duration-300 border border-gray-200 px-10 pt-10"
-                    style={{ backgroundImage: "url('https://themewagon.github.io/cozastore/images/banner-01.jpg')", backgroundSize: 'cover' }}>
+            <div className="my-[100px]">
 
-                    <h2 className="text-3xl font-bold mb-2">Women</h2>
-                    <h3 className="text-sm">Spring Collection</h3>
+                <div className="flex flex-col justify-center items-center gap-5">
+                    <p className="font-mono text-[25px] md:text-[65px]">New Collections</p>
+
+                    <p className="w-[70%] md:w-[40%] leading-relaxed text-center text-gray-400 text-[15px]">
+                        Discover thoughtfully curated styles designed to bring effortless elegance
+                        to your everyday wardrobe. Explore fresh silhouettes, timeless essentials,
+                        and modern pieces made for every moment.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-[75px] py-[65px] gap-[60px]">
+                    <div className="flex flex-col h-[500px]">
+                        <img src="https://themewagon.github.io/kaira/images/banner-image-6.jpg" alt="collections" 
+                        className="w-full h-[400px] object-cover transition-transform duration-500 hover:scale-90"></img>
+                        <h2 className="text-center mt-3 font-semibold font-mono text-lg">Timeless Classics</h2>
+                        <Link to="/shop" className="text-center font-bold bg-[#7E6A5A]/80 hover:bg-[#5a4a3a]/90 transition duration-300  hover:scale-105
+                         px-4 py-1 rounded-md mx-auto mt-3">Discover Now</Link>
+
+                    </div>
+                    <div className="flex flex-col h-[500px]">
+                        <img src="https://themewagon.github.io/kaira/images/banner-image-4.jpg" alt="collections" 
+                        className="w-full h-[400px] object-cover transition-transform duration-500 hover:scale-90"></img>
+                        <h2 className="text-center mt-3 text-center mt-3 font-semibold font-mono text-lg">Effortless Layers</h2>
+                        <Link to="/shop" className="text-center font-bold bg-[#7E6A5A]/80 hover:bg-[#5a4a3a]/90 transition duration-300  hover:scale-105
+                         px-4 py-1 rounded-md mx-auto mt-3">Discover Now</Link>
+
+                    </div>
+                   <div className="flex flex-col h-[500px]">
+                        <img src="https://themewagon.github.io/kaira/images/banner-image-5.jpg" alt="collections" 
+                        className="w-full h-[400px] object-cover transition-transform duration-500 hover:scale-90"></img>
+                        <h2 className="text-center mt-3 text-center mt-3 font-semibold font-mono text-lg">Modern Essentials</h2>
+                        <Link to="/shop" className="text-center font-bold bg-[#7E6A5A]/80 hover:bg-[#5a4a3a]/90 transition duration-300  hover:scale-105
+                         px-4 py-1 rounded-md mx-auto mt-3">Discover Now</Link>
+
+                    </div>
 
                 </div>
-                <div className="w-full md:w-1/3 h-[250px] bg-[#EAE9E5] hover:scale-105 transition duration-300 border border-gray-200"
-                    style={{ backgroundImage: "url('https://themewagon.github.io/cozastore/images/banner-02.jpg')", backgroundSize: 'cover' }}></div>
-                <div className="w-full md:w-1/3 h-[250px] bg-[#EAE9E5] hover:scale-105 transition duration-300 border border-gray-200"
-                    style={{ backgroundImage: "url('https://themewagon.github.io/cozastore/images/banner-03.jpg')", backgroundSize: 'cover' }}></div>
-
 
 
             </div>
-
-
 
         </>
     )
