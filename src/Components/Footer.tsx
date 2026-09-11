@@ -6,23 +6,30 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import ScrollAnimation from "./ScrollAnimation";
 
 function Footer() {
     return (
         <div className="mt-10">
 
+
             <div className="w-full flex flex-col justify-center items-center bg-[#EAE9E5]/30 py-[100px]">
 
-                <p className="text-2xl md:text-3xl lg:text-4xl font-semibold font-mono mb-10">SIGN UP FOR OUR NEWSLETTER</p>
+                <ScrollAnimation animation="animate__pulse">
+                    <p className="text-2xl md:text-3xl lg:text-4xl font-semibold font-mono mb-10">SIGN UP FOR OUR NEWSLETTER</p>
+                </ScrollAnimation>
 
                 <input type="email" placeholder="Your Email Address" className="border border-gray-300 rounded-md px-4 focus:outline-none
              py-2 w-[300px] md:w-[400px] lg:w-[700px] mb-4 shadow-[0_0_5px_0_rgba(0,0,0,0.1)] bg-white" />
 
                 <Link to="/signup" className="inline-block bg-[#7E6A5A] text-center text-[13px] md:text-lg text-white px-4 py-2 w-[300px] md:w-[400px] lg:w-[700px]
                      font-semibold hover:bg-[#5a4a3a] transition duration-300  hover:translate-y-1">SIGN UP</Link>
+
             </div>
 
+
             <div className="relative mb-[100px]">
+
                 <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-5 lg:gap-y-0">
                     <img src="https://themewagon.github.io/kaira/images/insta-item1.jpg" alt="footer-image" className="w-full h-[350px] md:h-[300px] lg:h-[200px] object-cover" />
                     <img src="https://themewagon.github.io/kaira/images/insta-item2.jpg" alt="footer-image" className="w-full h-[350px] md:h-[300px] lg:h-[200px] object-cover" />
@@ -32,6 +39,8 @@ function Footer() {
                     <img src="https://themewagon.github.io/kaira/images/insta-item6.jpg" alt="footer-image" className="w-full h-[350px] md:h-[300px] lg:h-[200px] object-cover" />
 
                 </div>
+               
+
 
                 <a href="https://www.instagram.com/thecurate.in/" target="_blank" rel="noopener noreferrer"
                     className="absolute left-1/2 -translate-x-1/2  -bottom-[10px] z-10 bg-[#7E6A5A] text-[12px]
@@ -39,6 +48,7 @@ function Footer() {
 
 
             </div>
+
 
 
             <div className="w-full bg-[#EAE9E5]/40">
@@ -100,7 +110,7 @@ function Footer() {
 
                 </div>
 
-<hr className="border border-gray-200" />
+                <hr className="border border-gray-200" />
                 <p className="text-center text-sm py-4">
                     &copy; {new Date().getFullYear()} Curate. All rights reserved.
                 </p>
