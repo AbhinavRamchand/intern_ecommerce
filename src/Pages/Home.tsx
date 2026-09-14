@@ -80,9 +80,9 @@ function Home() {
 
 
             </div>
-<ScrollAnimation animation="animate__pulse">
+  
             <p className="mt-[50px] mx-[75px] text-center font-mono text-[20px] md:text-[35px]">PRODUCT OVERVIEW</p>
-            </ScrollAnimation>
+        
 
             <Shop />
 
