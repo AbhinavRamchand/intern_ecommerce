@@ -1,13 +1,34 @@
-import Signup from './Signup'
-//import Trends from './Trends'
+//import Payoption from './payoption';
+import Trends from './Trends'
+import Blog from './Blog'
+import { Routes,Route} from 'react-router-dom';
+import Signup from './Signup';
 
 function App() {
   return (
     
-    <Signup/>
-    //<Trends/>
-    
+    //<Signup/>
+      //<Trends/>
+    //<Blog/>
+    //<Payoption/>
+
+     
+      <Routes>
+         <Route path="/" element={<Signup/>}/>
+
+         <Route path="/Trends" element={
+          <>
+         <Trends/>
+          <Blog/>
+         
+
+          </>
+        }/>
+        
+        </Routes>
+      
+
   )
 }
 
-export default App
+export default App;
