@@ -1,11 +1,33 @@
 import blogimg1 from "./assets/blogimg1.jpg";
 import blogimg2 from "./assets/blogimg2.jpg";
 import blogimg3 from "./assets/blogimg3.jpg";
-import winter from "./assets/winter.jpg"
-import mens from "./assets/mens.jpg"
-import street from "./assets/street.jpg"
+import winter from "./assets/winter.jpg";
+import mens from "./assets/mens.jpg";
+import street from "./assets/street.jpg";
+import whiteshirt from "./assets/whiteshirt.webp";
+import Blackshirt from "./assets/Blackshirt.webp";
+import pant from "./assets/pant.webp"
+
 
 function Blog() {
+
+  const products=[{
+       image:whiteshirt,
+       Title:"white shirt classic",
+       price:"₹1700",
+  },
+       {
+          image:Blackshirt,
+       Title:"Black shirt classic",
+       price:"₹2000",
+       },
+
+       {
+         image:pant,
+       Title:"Leg korean pant",
+       price:"₹999",
+       }
+  ]
   return (
     <section className="px-6 py-16 bg-white">
 
@@ -170,10 +192,10 @@ function Blog() {
 
 
     
-        <aside className="w-full lg:w-1/4">
+        <aside className="w-full lg:w-1/4 ">
 
           <h2 className="text-xl font-bold text-gray-900 border-b border-gray-200 pb-3">
-            Latest Articles
+            Recent Articles
           </h2>
 
 
@@ -246,10 +268,32 @@ function Blog() {
 
           </article>
 
+
+           <aside className="mt-5 ">
+          <h3 className="text-xl font-bold text-gray-900 mb-5">Featured Products</h3>
+
+          <div className="space-y-5">
+            {products.map((product)=>(
+              <div key={product.Title} className="flex gap-5 items-center">
+                <img className="w-50 h-50" src={product.image}></img>
+                <div>
+                 <h3 className=" font-xl font-semibold">{product.Title}</h3>
+                 <p className="text-gray-700">{product.price}</p>
+                 </div>
+                </div>
+            ))}
+          </div>
         </aside>
+
+
+        </aside>
+
+
+      
 
       </div>
 
+       
     </section>
   );
 }

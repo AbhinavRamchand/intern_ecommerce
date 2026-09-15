@@ -3,6 +3,7 @@ import Trends from './Trends'
 import Blog from './Blog'
 import { Routes,Route} from 'react-router-dom';
 import Signup from './Signup';
+import Payoption from './payoption';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <>
          <Trends/>
           <Blog/>
-         
+          <Payoption/>
 
           </>
         }/>
