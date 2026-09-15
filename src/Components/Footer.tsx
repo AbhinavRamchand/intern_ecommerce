@@ -43,7 +43,7 @@ function Footer() {
 
 
                 <a href="https://www.instagram.com/thecurate.in/" target="_blank" rel="noopener noreferrer"
-                    className="absolute left-1/2 -translate-x-1/2  -bottom-[10px] z-10 bg-[#7E6A5A] text-[12px]
+                    className="absolute left-1/2 -translate-x-1/2  -bottom-[10px] z-10 bg-[#7E6A5A] text-[12px] text-nowrap
                  text-white font-bold px-9 py-2  flex items-center justify-center hover:bg-[#5a4a3a] transition duration-300"> Follow us on Instagram</a>
 
 

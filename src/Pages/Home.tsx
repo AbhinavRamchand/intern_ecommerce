@@ -6,17 +6,18 @@ import ScrollAnimation from "../Components/ScrollAnimation";
 function Home() {
     return (
         <>
-            <div className="min-h-[400px] md:min-h-[600px] bg-[#EAE9E5] flex items-center">
-                <div className="w-1/2 px-10 md:px-14 animate__animated animate__fadeInDown animate__slow">
+            <div className="min-h-[400px] md:min-h-[600px] bg-[#EAE9E5] flex flex-col md:flex-row items-center">
+                <div className="w-full md:w-1/2 px-10 py-10  lg:px-14  animate__animated animate__fadeInLeft md:animate__fadeInDown
+                 animate__slow order-2 md:order-1">
 
                     <p className="text-sm sm:text-md md:text-2xl text-gray-700">THE NEW EDIT </p>
-                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-[#2F2F2F] mt-8"> Effortless style, Every day.</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-[#2F2F2F] mt-5 md:mt-8"> Effortless style, Every day.</h1>
 
                     <Link to="/shop" className="inline-block mt-8 bg-[#7E6A5A] text-[13px] md:text-lg text-white px-4 py-2 sm:px-6 sm:py-2 md:px-10 md:py-4 
                     rounded-full font-semibold hover:bg-[#5a4a3a] transition duration-300  hover:scale-105">SHOP NOW</Link>
                 </div>
 
-                <div className="w-1/2 h-[600px]">
+                <div className="w-full md:w-1/2 h-[350px] md:h-[600px] order-1 md-order-2">
                     <img src="https://themewagon.github.io/kaira/images/single-image-2.jpg" alt="home-image"
                         className="w-full h-full object-cover" />
                 </div>
@@ -43,7 +44,7 @@ function Home() {
 
               
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-[75px] py-[65px] gap-[60px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10 md:px-[75px] md:py-[65px] gap-[60px]">
                       <ScrollAnimation animation="animate__zoomIn" speed="slow">
                     <div className="flex flex-col h-[500px]">
                         <img src="https://themewagon.github.io/kaira/images/banner-image-6.jpg" alt="collections"

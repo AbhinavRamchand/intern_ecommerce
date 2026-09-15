@@ -7,6 +7,7 @@ import type { CartItem,Product } from "../Data/Product";
 function Layout(){
     const [cartItems,setCartItems] = useState<CartItem[]>([]);
     const [cartOpen,setCartOpen] = useState(false);
+    const [wishlist,setWishlist] = useState<Product[]>([]);
 
     const addToCart=(product:Product, quantity:number) =>{
         setCartItems((currentItems)=>{
@@ -14,7 +15,7 @@ function Layout(){
 
             if(existingItem){
                 return currentItems.map((item)=>
-                item.id ===product.id ? {...item,quantity:item.quantity+quantity}:item);
+                item.id ===product.id ? {...item,quantity:item.quantity+quantity} :item);
             }
 
             return [
@@ -23,7 +24,6 @@ function Layout(){
                     ...product,
                     quantity:quantity
                 }];
-
         });
     };
 
@@ -35,13 +35,27 @@ function Layout(){
 
     const cartCount =cartItems.reduce((total,item)=>total + item.quantity,0);
 
+    const toggleWishlist =(product:Product)=>{
+        setWishlist((currentWishlist)=>{
+            const alreadyExists = currentWishlist.some((item)=>item.id ===product.id);
+            if(alreadyExists){
+                return currentWishlist.filter((item)=>item.id !==product.id);
+            }
+
+            return [
+                ...currentWishlist,
+                product
+            ];
+        });
+    }
+
 
     return (
         <div className="flex flex-col min-h-screen">
             <NavBar cartCount={cartCount} cartItems={cartItems} cartOpen={cartOpen} setCartOpen={setCartOpen}
-                removeFromCart={removeFromCart}/>
+                removeFromCart={removeFromCart} wishlist={wishlist} toggleWishlist={toggleWishlist}/>
             <div className="flex-1 pt-16">
-                <Outlet context={{ addToCart}} />
+                <Outlet context={{ addToCart,wishlist,toggleWishlist}} />
             </div>
             <Footer />
 

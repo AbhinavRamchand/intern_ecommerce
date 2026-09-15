@@ -23,12 +23,12 @@ function About() {
 
             <div className="bg-[#EAE9E5]">
                 <ScrollAnimation animation="animate__zoomIn" speed="slow">
-                <p className="py-5 text-center text-[10px] md:text-[12px] font-semibold">TIMELESS LUXURY, MODERN DESIGN & ELEVATED STYLE — CURATED FOR YOU.</p>
+                <p className="py-5 text-center text-[9px] md:text-[12px] font-semibold">TIMELESS LUXURY, MODERN DESIGN & ELEVATED STYLE — CURATED FOR YOU.</p>
                 </ScrollAnimation>
                 </div>
 
-<ScrollAnimation speed="slow">
-            <div className="flex flex-col md:flex-row w-[90%] mx-auto mt-[95px] mb-[150px] gap-[85px]">
+               <ScrollAnimation speed="slow">
+            <div className="flex flex-col md:flex-row w-[85%] mx-auto mt-[50px] md:mt-[95px] mb-[150px] gap-[85px]">
                 
                 <div className="w-full md:w-[58%]">
                     <h2 className="mb-3 font-bold text-[24px] text-[#7E6A5A]">About Curate</h2>
@@ -52,7 +52,7 @@ function About() {
                     </p>
                 </div>
            
-                <div className="relative w-[400px] h-[350px] mx-auto">
+                <div className="relative w-[300px] md:w-[400px] h-[350px] mx-auto">
 
                     <div className="absolute left-[-25px] top-[25px] w-full h-full border-2 border-gray-300"></div>
 
@@ -70,8 +70,8 @@ function About() {
               </ScrollAnimation>
 
 <ScrollAnimation speed="slow">
-            <div className="flex flex-col md:flex-row w-[90%] mx-auto my-[95px] gap-[85px]">
-                <div className="relative order-2 md:order-1 w-[400px] h-[350px] mx-auto">
+            <div className="flex flex-col md:flex-row w-[85%] mx-auto my-[95px] gap-[85px]">
+                <div className="relative order-2 md:order-1 w-[300px] md:w-[400px] h-[350px] mx-auto">
 
                     <div className="absolute right-[-25px] top-[25px] w-full h-full border-2 border-gray-300"></div>
 
