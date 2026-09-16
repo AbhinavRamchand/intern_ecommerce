@@ -83,7 +83,7 @@ function Login() {
                 transition duration-300 cursor-pointer">Login</button>
 
                     <p className="text-[13px] my-4 text-gray-700 mx-auto">
-                        Don't have an account? <Link to="/register" className="text-[#7E6A5A] hover:underline">Register</Link>
+                        Don't have an account? <Link to="/" className="text-[#7E6A5A] hover:underline">Register</Link>
                     </p>
 
                 </div>

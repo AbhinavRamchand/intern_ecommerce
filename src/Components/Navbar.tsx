@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import type { CartItem, Product } from "../Data/Product";
+import { Link } from "react-router-dom";
 
 
 interface NavBarProps {
@@ -129,9 +130,9 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                   hover:bg-gray-100 transition duration-300 hover:scale-105">
                                                             Remove  </button>
 
-                                                        <button className="text-xs px-2 py-1 rounded-sm font-bold 
+                                                        <Link to="/payoption" className="text-xs px-2 py-1 rounded-sm font-bold 
                                                   bg-[#5a4a3a] text-white transition duration-300 hover:scale-105 text-nowrap">
-                                                            Buy Now </button>
+                                                            Buy Now </Link>
                                                     </div>
 
                                                 </div>
@@ -189,10 +190,10 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                     border-gray-400 px-2 py-1 rounded-sm hover:scale-105                                                     
                                                         font-bold hover:bg-gray-100 transition duration-300">Remove</button>
 
-                                                    <button className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a]                                                        
+                                                    <Link to="/payoption" className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a]                                                        
                                                         text-white  transition duration-300 hover:scale-105  text-nowrap">
                                                         Buy Now
-                                                    </button>
+                                                    </Link>
 
                                                 </div>
 

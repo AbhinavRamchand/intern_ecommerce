@@ -6,10 +6,10 @@ import Layout from './Pages/Layout'
 import About from './Pages/About'
 import Shop from './Pages/Shop'
 
-import Trends from './Trends'
-import Blog from './Blog'
-import Signup from './Signup';
-import Payoption from './payoption';
+import Trends from './Pages/Trends'
+import Blog from './Pages/Blog'
+import Signup from './Pages/Signup';
+import Payoption from './Components/payoption';
 
 function App() {
   return (

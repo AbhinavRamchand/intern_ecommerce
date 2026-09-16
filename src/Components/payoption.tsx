@@ -1,7 +1,7 @@
 import { useState } from "react"; 
 import { SiPhonepe } from "react-icons/si"; 
-import gpay from "./assets/google-pay.png"; 
-import upi from "./assets/upi.png"; 
+import gpay from "../assets/google-pay.png"; 
+import upi from "../assets/upi.png"; 
 
 import { Check } from "lucide-react";
 function Payoption() { 

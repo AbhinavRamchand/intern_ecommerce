@@ -1,7 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import signupimg from "./assets/signupimg.jpg";
+import signupimg from "../assets/signupimg.jpg";
 
 
 function Signup() {
@@ -61,7 +61,7 @@ function Signup() {
 
     setMessage("Signup successful");
 
-    navigate("/Trends");
+    navigate("/home");
   };
 
   return (

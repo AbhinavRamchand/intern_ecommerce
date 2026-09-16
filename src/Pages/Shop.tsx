@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Link } from "react-router-dom";
 
 type ShopContext = {
     addToCart: (product: Product, quantity: number) => void;
@@ -179,11 +180,11 @@ function Shop() {
                                  transition duration-300  hover:scale-105 cursor-pointer"><ShoppingCartIcon fontSize="small" className="mr-1" />
                                             Add to cart</button>
 
-                                        <button className="px-2 py-2 w-[90%] w-full sm:w-[180px]  md:px-8 md:py-2 bg-[#7E6A5A] 
+                                        <Link to="/payoption" className="px-2 py-2 w-[90%] w-full sm:w-[180px]  md:px-8 md:py-2 bg-[#7E6A5A] 
                                         text-[11px] 
                                         md:text-base  text-white hover:bg-[#5a4a3a]
                                  transition duration-300  hover:scale-105 cursor-pointer">
-                                            Buy at &#8377;{selectedProduct.price}</button>
+                                            Buy at &#8377;{selectedProduct.price}</Link>
 
 
                                     </div>

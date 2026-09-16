@@ -1,15 +1,17 @@
 import  { useEffect, useState } from "react";
-import trending from "./assets/trnding.jpg";
-import retro from "./assets/retro.jpg";
-import streetwear from "./assets/streetwear.jpg";
-import Tshirt from "./assets/Tshirt.jpg";
-import squareneck from "./assets/squareneck.jpg";
-import croptop from "./assets/croptop.jpg"
-import checkshirt from "./assets/checkshirt.jpg"
-import Tshirtwithsleeve from "./assets/T-shirt with sleeve.jpg"
-import Frontpocket from "./assets/Frontpocket.jpg"
-import Fitshirt  from "./assets/Baggy shirt.jpg"
-import coloredshirt from "./assets/coloredshirt.jpg"
+import trending from "../assets/trnding.jpg";
+import retro from "../assets/retro.jpg";
+import streetwear from "../assets/streetwear.jpg";
+import Tshirt from "../assets/Tshirt.jpg";
+import squareneck from "../assets/squareneck.jpg";
+import croptop from "../assets/croptop.jpg"
+import checkshirt from "../assets/checkshirt.jpg"
+import Tshirtwithsleeve from "../assets/T-shirt with sleeve.jpg"
+import Frontpocket from "../assets/Frontpocket.jpg"
+import Fitshirt  from "../assets/Baggy shirt.jpg"
+import coloredshirt from "../assets/coloredshirt.jpg"
+import { Link } from "react-router-dom";
+
 function Trends() {
 
   const slides = [
@@ -152,9 +154,9 @@ function Trends() {
                   {slide.subtitle}
                 </p>
 
-                <button className="mt-8 rounded-full bg-white px-8 py-4 font-bold text-black transition hover:scale-105">
+                <Link to="/shop" className="inline-block mt-8 rounded-full bg-white px-8 py-4 font-bold text-black transition hover:scale-105">
                   SHOP NOW 
-                </button>
+                </Link>
 
               </div>
             </div>
@@ -174,6 +176,8 @@ function Trends() {
       key={product.title}
       className="group w-full  mx-auto  bg-white  transition-all duration-300"
     >
+
+      
 
       <div className="relative overflow-hidden bg-gray-100">
         <img
@@ -207,9 +211,9 @@ function Trends() {
           {product.offer}
         </p>
 
-       
-
+    
       </div>
+ 
     </div>
   ))}
 

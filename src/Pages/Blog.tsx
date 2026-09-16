@@ -1,12 +1,12 @@
-import blogimg1 from "./assets/blogimg1.jpg";
-import blogimg2 from "./assets/blogimg2.jpg";
-import blogimg3 from "./assets/blogimg3.jpg";
-import winter from "./assets/winter.jpg";
-import mens from "./assets/mens.jpg";
-import street from "./assets/street.jpg";
-import whiteshirt from "./assets/whiteshirt.webp";
-import Blackshirt from "./assets/Blackshirt.webp";
-import pant from "./assets/pant.webp"
+import blogimg1 from "../assets/blogimg1.jpg";
+import blogimg2 from "../assets/blogimg2.jpg";
+import blogimg3 from "../assets/blogimg3.jpg";
+import winter from "../assets/winter.jpg";
+import mens from "../assets/mens.jpg";
+import street from "../assets/street.jpg";
+import whiteshirt from "../assets/whiteshirt.webp";
+import Blackshirt from "../assets/Blackshirt.webp";
+import pant from "../assets/pant.webp"
 
 
 function Blog() {
