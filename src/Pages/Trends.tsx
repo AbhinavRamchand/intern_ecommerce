@@ -1,6 +1,6 @@
 import  { useEffect, useState } from "react";
 import trending from "../assets/trnding.jpg";
-import retro from "../assets/retro.jpg";
+import retro from "../assets/Retro.jpg";
 import streetwear from "../assets/streetwear.jpg";
 import Tshirt from "../assets/Tshirt.jpg";
 import squareneck from "../assets/squareneck.jpg";
