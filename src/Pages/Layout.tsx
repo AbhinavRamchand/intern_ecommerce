@@ -1,13 +1,30 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CartItem,Product } from "../Data/Product";
 
 function Layout(){
-    const [cartItems,setCartItems] = useState<CartItem[]>([]);
+    const [cartItems,setCartItems] = useState<CartItem[]>(()=>{
+        const savedCart = localStorage.getItem("cartItems");
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+    
     const [cartOpen,setCartOpen] = useState(false);
-    const [wishlist,setWishlist] = useState<Product[]>([]);
+
+    const [wishlist,setWishlist] = useState<Product[]>(()=>{
+        const savedWishlist = localStorage.getItem("wishlist");
+        return savedWishlist? JSON.parse(savedWishlist) : [];
+    });
+
+
+    useEffect(()=>{
+        localStorage.setItem("cartItems",JSON.stringify(cartItems));
+    },[cartItems]);
+
+    useEffect(()=>{
+        localStorage.setItem("wishlist",JSON.stringify(wishlist));
+    },[wishlist]);
 
     const addToCart=(product:Product, quantity:number) =>{
         setCartItems((currentItems)=>{
@@ -15,7 +32,8 @@ function Layout(){
 
             if(existingItem){
                 return currentItems.map((item)=>
-                item.id ===product.id ? {...item,quantity:item.quantity+quantity} :item);
+                item.id ===product.id ? {...item,quantity:item.quantity+quantity,price:(item.quantity+quantity)*product.price}
+                 :item);
             }
 
             return [
