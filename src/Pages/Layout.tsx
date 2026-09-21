@@ -40,7 +40,9 @@ function Layout(){
                 ...currentItems,
                 {
                     ...product,
-                    quantity:quantity
+                    quantity:quantity,
+                    price:product.price * quantity
+
                 }];
         });
     };
