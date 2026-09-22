@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import type { CartItem, Product } from "../Data/Product";
 import { Link } from "react-router-dom";
+import CheckIcon from '@mui/icons-material/Check';
 
 
 interface NavBarProps {
@@ -17,12 +18,17 @@ interface NavBarProps {
     removeFromCart: (productId: number) => void;
     wishlist: Product[];
     toggleWishlist: (product: Product) => void;
+    addToCart: (product: Product, quantity: number) => void;
+    searchTerm: string;
+    setSearchTerm: (value: string) => void;
 }
 
-function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, wishlist, toggleWishlist }
+function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, wishlist,
+    toggleWishlist, addToCart, searchTerm, setSearchTerm }
     : NavBarProps) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [wishlistOpen, setWishlistOpen] = useState(false);
+    const [cartMessage, setCartMessage] = useState(false);
 
     return (
         <>
@@ -51,7 +57,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                 <div className="flex gap-7 md:gap-5 items-center">
                     <div className="hidden md:flex border border-gray-400 rounded-md px-2 py-1 gap-2 w-[180px] items-center">
                         <SearchIcon fontSize="small" className="text-gray-400" />
-                        <input type="text" placeholder="Search" className=" placeholder:text-[13px] focus:outline-none" />
+                        <input type="text" placeholder="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+                            className=" placeholder:text-[13px] focus:outline-none" />
                     </div>
 
                     <button onClick={() => setCartOpen(true)} className="relative cursor-pointer">
@@ -130,7 +137,7 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                   hover:bg-gray-100 transition duration-300 hover:scale-105">
                                                             Remove  </button>
 
-                                                        <Link to="/payoption" className="text-xs px-2 py-1 rounded-sm font-bold 
+                                                        <Link to="/payoption" onClick={() => setCartOpen(false)} className="text-xs px-2 py-1 rounded-sm font-bold 
                                                   bg-[#5a4a3a] text-white transition duration-300 hover:scale-105 text-nowrap">
                                                             Buy Now </Link>
                                                     </div>
@@ -184,14 +191,29 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                                                 <p className="text-sm text-gray-500 my-1">&#8377;{item.price} </p>
 
-                                                <div className="flex gap-2  mt-3 md:gap-3">
+                                                <div className="flex flex-col gap-3">
+                                                    <div className="flex gap-1  mt-3 md:gap-2">
 
-                                                    <button onClick={() => toggleWishlist(item)} className="text-xs border 
+                                                        <button onClick={() => toggleWishlist(item)} className="text-xs border 
                                                     border-gray-400 px-2 py-1 rounded-sm hover:scale-105                                                     
                                                         font-bold hover:bg-gray-100 transition duration-300">Remove</button>
 
-                                                    <Link to="/payoption" className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a]                                                        
-                                                        text-white  transition duration-300 hover:scale-105  text-nowrap">
+                                                        <button onClick={() => {
+                                                            addToCart(item, 1);
+                                                            setCartMessage(true);
+
+                                                            setTimeout(() => {
+                                                                setCartMessage(false);
+                                                            }, 2000);
+                                                        }} className="text-xs border 
+                                                    border-gray-400 px-2 py-1 rounded-sm hover:scale-105                                                     
+                                                        font-bold hover:bg-gray-100 transition duration-300 text-nowrap">Add to cart</button>
+
+                                                    </div>
+
+
+                                                    <Link to="/payoption" onClick={() => setWishlistOpen(false)} className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a]                                                        
+                                                        text-white  transition duration-300 hover:scale-105  text-nowrap text-center w-[150px] ">
                                                         Buy Now
                                                     </Link>
 
@@ -210,6 +232,14 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                         </div>
 
                     </div>
+                </div>
+            )}
+
+            {cartMessage && (
+                <div className="fixed top-20 right-5 z-[200] bg-white shadow-lg px-3 py-2 rounded-md flex items-center justify-center">
+                    <p className="text-[11px] md:text-[13px] font-semibold text-gray-800">
+                        <CheckIcon fontSize="small" /> Product added to cart
+                    </p>
                 </div>
             )}
 

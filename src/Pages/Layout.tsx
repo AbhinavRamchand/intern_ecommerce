@@ -11,6 +11,7 @@ function Layout(){
     });
     
     const [cartOpen,setCartOpen] = useState(false);
+    const [searchTerm,setSearchTerm] = useState<string>("");
 
     const [wishlist,setWishlist] = useState<Product[]>(()=>{
         const savedWishlist = localStorage.getItem("wishlist");
@@ -73,9 +74,10 @@ function Layout(){
     return (
         <div className="flex flex-col min-h-screen">
             <NavBar cartCount={cartCount} cartItems={cartItems} cartOpen={cartOpen} setCartOpen={setCartOpen}
-                removeFromCart={removeFromCart} wishlist={wishlist} toggleWishlist={toggleWishlist}/>
+                removeFromCart={removeFromCart} wishlist={wishlist} toggleWishlist={toggleWishlist} addToCart={addToCart}
+                searchTerm ={searchTerm} setSearchTerm={setSearchTerm}/>
             <div className="flex-1 pt-16">
-                <Outlet context={{ addToCart,wishlist,toggleWishlist}} />
+                <Outlet context={{ addToCart,wishlist,toggleWishlist,searchTerm}} />
             </div>
             <Footer />
 

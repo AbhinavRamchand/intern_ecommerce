@@ -13,10 +13,11 @@ type ShopContext = {
     addToCart: (product: Product, quantity: number) => void;
     wishlist: Product[];
     toggleWishlist: (product: Product) => void;
+    searchTerm: string;
 }
 
 function Shop() {
-    const { addToCart, wishlist, toggleWishlist } = useOutletContext<ShopContext>();
+    const { addToCart, wishlist, toggleWishlist,searchTerm } = useOutletContext<ShopContext>();
 
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -25,8 +26,13 @@ function Shop() {
     const [showMessage, setShowMessage] = useState(false);
 
 
-    const filteredProducts = selectedCategory === "all" ? products : products.filter(
-        (product) => product.category === selectedCategory);
+    const filteredProducts = products.filter((product)=>{
+        const category = selectedCategory === "all" ? products : product.category === selectedCategory;
+
+        const search = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+        return category && search;
+    })
 
 
     const handleClick = (product: Product) => {
