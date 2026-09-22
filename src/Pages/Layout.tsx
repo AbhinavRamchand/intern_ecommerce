@@ -4,6 +4,8 @@ import Footer from "../Components/Footer";
 import { useEffect, useState } from "react";
 import type { CartItem,Product } from "../Data/Product";
 
+
+
 function Layout(){
     const [cartItems,setCartItems] = useState<CartItem[]>(()=>{
         const savedCart = localStorage.getItem("cartItems");
@@ -17,6 +19,21 @@ function Layout(){
         const savedWishlist = localStorage.getItem("wishlist");
         return savedWishlist? JSON.parse(savedWishlist) : [];
     });
+
+     const [darkMode, sertDarkMode]=useState<boolean>(()=>{
+           const saveMode=localStorage.getItem("darkMode")
+             return saveMode==="true"
+     });
+
+     useEffect(()=>{
+        localStorage.setItem("darkMode",JSON.stringify(darkMode));
+     },[darkMode])
+
+
+
+     const toggleDarkMode=()=>{
+        sertDarkMode((currentMode)=>!currentMode);
+     }
 
 
     useEffect(()=>{
@@ -74,12 +91,18 @@ function Layout(){
     return (
         <div className="flex flex-col min-h-screen">
             <NavBar cartCount={cartCount} cartItems={cartItems} cartOpen={cartOpen} setCartOpen={setCartOpen}
+<<<<<<< HEAD
                 removeFromCart={removeFromCart} wishlist={wishlist} toggleWishlist={toggleWishlist} addToCart={addToCart}
                 searchTerm ={searchTerm} setSearchTerm={setSearchTerm}/>
             <div className="flex-1 pt-16">
                 <Outlet context={{ addToCart,wishlist,toggleWishlist,searchTerm}} />
+=======
+                removeFromCart={removeFromCart} wishlist={wishlist} toggleWishlist={toggleWishlist}  darkMode={darkMode}  toggleDarkMode={toggleDarkMode} />
+            <div className="flex-1 pt-16">
+                <Outlet context={{ addToCart,wishlist,toggleWishlist,  darkMode}} />
+>>>>>>> 003975c78dfd9cf2e3e48aa514f5afed0d604f99
             </div>
-            <Footer />
+            <Footer darkMode={darkMode} />
 
             </div>
     )
