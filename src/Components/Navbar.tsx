@@ -1,5 +1,5 @@
 
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link ,useSearchParams } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -10,6 +10,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import { useState } from "react";
 import type { CartItem, Product } from "../Data/Product";
 import CheckIcon from '@mui/icons-material/Check';
+import { ArrowLeft } from "lucide-react";
 
 
 interface NavBarProps {
@@ -36,6 +37,10 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
     const [menuOpen, setMenuOpen] = useState(false);
     const [wishlistOpen, setWishlistOpen] = useState(false);
     const [cartMessage, setCartMessage] = useState(false);
+
+
+        const [searchParams]=useSearchParams();
+    const fromAdmin=searchParams.get("from")==="admin"
 
     return (
         <>
@@ -253,6 +258,15 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                             {wishlist.length}
                         </span>
                     </button>
+
+
+                    {fromAdmin&&(
+                        <div className="bg-[#7E6A5A]  rounded-lg gap-1 items-center ">
+                            <Link className="text-white flex p-1 text-sm font-medium" to="./adminlayout/dashboard">
+                            <ArrowLeft/>Back to Admin panel
+                            </Link>
+                            </div>
+                    )}
 
                   
                     <button

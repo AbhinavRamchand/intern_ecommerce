@@ -1,9 +1,10 @@
 
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext, } from "react-router-dom";
 import Shop from "./Shop";
 import ScrollAnimation from "../Components/ScrollAnimation";
 
 function Home() {
+
     const { darkMode } = useOutletContext<{ darkMode: boolean }>();
 
     return (

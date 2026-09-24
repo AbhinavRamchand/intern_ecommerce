@@ -20,7 +20,7 @@ function Layout() {
         return savedWishlist ? JSON.parse(savedWishlist) : [];
     });
 
-    const [darkMode, sertDarkMode] = useState<boolean>(() => {
+    const [darkMode, setDarkMode] = useState<boolean>(() => {
         const saveMode = localStorage.getItem("darkMode")
         return saveMode === "true"
     });
@@ -32,7 +32,7 @@ function Layout() {
 
 
     const toggleDarkMode = () => {
-        sertDarkMode((currentMode) => !currentMode);
+        setDarkMode((currentMode) => !currentMode);
     }
 
 
