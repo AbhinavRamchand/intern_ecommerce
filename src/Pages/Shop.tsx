@@ -15,27 +15,12 @@ type ShopContext = {
     addToCart: (product: Product, quantity: number) => void;
     wishlist: Product[];
     toggleWishlist: (product: Product) => void;
-<<<<<<< HEAD
     searchTerm: string;
+     darkMode: boolean;
 }
 
 function Shop() {
-    const { addToCart, wishlist, toggleWishlist,searchTerm } = useOutletContext<ShopContext>();
-=======
-    darkMode: boolean;
-};
-
-
-function Shop() {
-
-    const {
-        addToCart,
-        wishlist,
-        toggleWishlist,
-        darkMode
-    } = useOutletContext<ShopContext>();
-
->>>>>>> 003975c78dfd9cf2e3e48aa514f5afed0d604f99
+    const { addToCart, wishlist, toggleWishlist,searchTerm, darkMode } = useOutletContext<ShopContext>();
 
     const [selectedCategory, setSelectedCategory] = useState("all");
 
@@ -47,7 +32,6 @@ function Shop() {
     const [showMessage, setShowMessage] = useState(false);
 
 
-<<<<<<< HEAD
     const filteredProducts = products.filter((product)=>{
         const category = selectedCategory === "all" ? products : product.category === selectedCategory;
 
@@ -55,15 +39,6 @@ function Shop() {
 
         return category && search;
     })
-=======
-    const filteredProducts =
-        selectedCategory === "all"
-            ? products
-            : products.filter(
-                (product) =>
-                    product.category === selectedCategory
-            );
->>>>>>> 003975c78dfd9cf2e3e48aa514f5afed0d604f99
 
 
     const handleClick = (product: Product) => {
@@ -574,7 +549,7 @@ function Shop() {
                                             cursor-pointer"
                                         >
                                             Buy at &#8377;
-                                            {selectedProduct.price}
+                                            {selectedProduct.price * quantity}
                                         </Link>
 
                                     </div>

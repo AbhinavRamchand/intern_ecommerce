@@ -10,13 +10,18 @@ import Trends from './Pages/Trends'
 import Blog from './Pages/Blog'
 import Signup from './Pages/Signup';
 import Payoption from './Components/payoption';
+import Categories from './AdminPanel/Categories'
+import Customers from './AdminPanel/Customers'
 
 function App() {
   return (
    <BrowserRouter>
    <Routes>
-    <Route path="/login" element={<Login />} />
-     <Route path="/" element={<Signup/>}/>
+    <Route path="/" element={<Login />} />
+     <Route path="/signup" element={<Signup/>}/>
+     <Route path="/categories" element ={<Categories />} />
+     <Route path ="/customers" element = {<Customers />} />
+   
 
    <Route element ={<Layout />}>
     <Route path="/home" element={<Home />} />

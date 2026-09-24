@@ -172,9 +172,6 @@ function Home() {
 
                     </ScrollAnimation>
 
-
-                    {/* CARD 2 */}
-
                     <ScrollAnimation
                         animation="animate__zoomIn"
                         speed="slow"
