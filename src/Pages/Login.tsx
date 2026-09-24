@@ -21,7 +21,7 @@ function Login() {
         setError("");
 
         if(email ==="admin@gmail.com" && password ==="admin@123"){
-            navigate("/customers");
+            navigate("/dashboard");
             return;
         }
 

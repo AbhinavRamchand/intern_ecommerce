@@ -1,10 +1,19 @@
+import {useOutletContext} from "react-router-dom"
+
 interface Product {
     image: string;
     type: string;
     total: number;
 }
 
+interface DashoardProps {
+  darkMode: boolean;
+}
+
+
 function Categories() {
+
+      const {darkMode}=useOutletContext<DashoardProps>();
 
     const products: Product[] = [
         {
@@ -51,13 +60,13 @@ function Categories() {
     ]
 
     return (
-        <div className="bg-[#EAE9E5] p-5 md:px-10 py-5">
-            <h2 className="font-bold text-[#7E6A5A] text-xl  md:text-2xl mb-5">Categories</h2>
+        <div className={` p-5 md:px-10 py-5 ${darkMode?"bg-black":"bg-[#F7F6F3]"}`}>
+            <h2 className={`font-bold  text-xl  md:text-2xl mb-5 ${darkMode?"text-white":"text-[#7E6A5A]"}`}>Categories</h2>
 
             <div className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  md:gap-8">
                 {products.map((product) => (
 
-                    <div key={product.type} className="flex flex-col p-2 shadow-[0_2px_8px_rgba(0,0,0,0.08)] rounded-lg gap-4">
+                    <div key={product.type} className={`flex flex-col p-2 rounded-lg gap-4 ${darkMode ? "bg-[#242424] border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)]" :"shadow-[0_2px_8px_rgba(0,0,0,0.08)]"}`}>
 
                         <div className="aspect-[3/3]  w-full overflow-hidden rounded-sm">
                             <img src={product.image} alt= {product.type} className="h-full  object-cover object-center 
@@ -67,7 +76,7 @@ function Categories() {
 
                         <div className="ml-1 pb-1">
                             <p className="bg-[#7E6A5A]/90 w-fit text-white text-[10px] md:text-[13px] mb-1 px-2 rounded-sm">{product.type}</p>
-                            <p className="text-gray-500 text-[10px] md:text-[12px]">{product.total} products</p>
+                            <p className={`text-[10px] md:text-[12px] ${darkMode?"text-white":"text-gray-500"}`}>{product.total} products</p>
                         </div>
 
                     </div>

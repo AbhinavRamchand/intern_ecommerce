@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { products, type Product } from "../Data/Product";

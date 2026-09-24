@@ -1,4 +1,5 @@
-import { NavLink, Link } from "react-router-dom";
+
+import { NavLink, Link ,useSearchParams } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -10,6 +11,7 @@ import { useState } from "react";
 import type { CartItem, Product } from "../Data/Product";
 import CheckIcon from '@mui/icons-material/Check';
 import { Fullscreen, FullscreenExit } from "@mui/icons-material";
+import { ArrowLeft } from "lucide-react";
 
 
 interface NavBarProps {
@@ -48,6 +50,10 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
       setIsFullScreen(false);
     }
   }
+
+
+        const [searchParams]=useSearchParams();
+    const fromAdmin=searchParams.get("from")==="admin"
 
     return (
         <>
@@ -265,6 +271,15 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                     </button>
 
 
+                    {fromAdmin&&(
+                        <div className="bg-[#7E6A5A]  rounded-lg gap-1 items-center ">
+                            <Link className="text-white flex p-1 text-sm font-medium" to="/dashboard">
+                            <ArrowLeft/>Back to Admin panel
+                            </Link>
+                            </div>
+                    )}
+
+                  
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className={`md:hidden ${darkMode ? "text-white" : "text-black"
