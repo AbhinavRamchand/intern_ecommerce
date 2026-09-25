@@ -151,7 +151,7 @@ function Signup() {
               Already have an account?{" "}
 
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
                 type="button"
                 className="text-red-500"
               >
