@@ -17,7 +17,7 @@ function Dashboard() {
 
   return (
     <div
-      className={`h-full ${
+      className={`min-h-full ${
         darkMode ? "bg-black" : "bg-[#F6F5F1]"
       } px-6 py-8 md:px-10`}
     >

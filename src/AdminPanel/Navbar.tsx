@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {Link } from "react-router-dom"
 import { Fullscreen, FullscreenExit } from "@mui/icons-material";
 import { useState } from "react";
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 interface NavbarProps{
@@ -16,15 +17,17 @@ interface NavbarProps{
     setSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
     darkMode:boolean;
     setDarkMode:React.Dispatch<React.SetStateAction<boolean>>;
+    menuBarOpen :boolean;
+  setMenuBarOpen: (value:boolean) =>void;
 
 }
 
 
-function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode}:NavbarProps){
+function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode,menuBarOpen,setMenuBarOpen}:NavbarProps){
 
-  
 
     const navigate=useNavigate();
+
      const [isFullScreen, setIsFullScreen] = useState(false);
     
          function toggleScreen() {
@@ -41,9 +44,15 @@ function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode}:NavbarProps){
     return(
         <div className={`flex  justify-between p-2 ${darkMode?"bg-black text-white":  ""} `}>
 
-           <button onClick={()=>{setSideBarOpen(!sideBarOpen)}}>
+           <button onClick={()=>{setSideBarOpen(!sideBarOpen)}} className="hidden md:block">
             {sideBarOpen?<ArrowLeft/>:<ArrowRight/>}
            </button>
+
+             <button onClick={()=>{setMenuBarOpen(!menuBarOpen)}} className="block md:hidden">
+           <MenuIcon />
+           </button>
+
+
 
             <div className="flex gap-2">
 
@@ -65,7 +74,7 @@ function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode}:NavbarProps){
 
                     <button
                         onClick={toggleScreen}
-                        className={`cursor-pointer transition-colors hidden md:block ${darkMode
+                        className={`cursor-pointer transition-colors ${darkMode
                                 ? "text-white"
                                 : "text-gray-800"
                             }`}
@@ -87,7 +96,7 @@ function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode}:NavbarProps){
                   py-2
                   rounded-lg
                   text-white
-                  text-sm sm:text-base
+                  text-[12px] sm:text-[14px]
                   whitespace-nowrap
                 "
               >
@@ -103,7 +112,7 @@ function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode}:NavbarProps){
                   py-2
                   rounded-lg
                 
-                  text-sm sm:text-base
+                  text-[12px] sm:text-[14px]
                   whitespace-nowrap
                 `}
               >

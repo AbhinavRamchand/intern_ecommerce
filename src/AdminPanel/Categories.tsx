@@ -60,7 +60,7 @@ function Categories() {
     ]
 
     return (
-        <div className={` p-5 md:px-10 py-5 ${darkMode?"bg-black":"bg-[#F7F6F3]"}`}>
+        <div className={`min-h-full p-5 md:px-10 py-5 ${darkMode?"bg-black":"bg-[#F7F6F3]"}`}>
             <h2 className={`font-bold  text-xl  md:text-2xl mb-5 ${darkMode?"text-white":"text-[#7E6A5A]"}`}>Categories</h2>
 
             <div className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  md:gap-8">

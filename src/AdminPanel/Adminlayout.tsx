@@ -6,6 +6,7 @@ import { useState,useEffect } from "react";
 function Adminlayout() {
 
       const [sideBarOpen,setSideBarOpen]=useState<boolean>(true);
+      const [menuBarOpen,setMenuBarOpen] = useState<boolean>(false);
 
 
  const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -21,7 +22,7 @@ function Adminlayout() {
 
       
       <div >
-        <Sidebar darkMode={darkMode} sideBarOpen={sideBarOpen} />
+        <Sidebar darkMode={darkMode} sideBarOpen={sideBarOpen} menuBarOpen={menuBarOpen} setMenuBarOpen ={setMenuBarOpen} />
       </div>
      
 
@@ -34,11 +35,12 @@ function Adminlayout() {
             setDarkMode={setDarkMode}
             sideBarOpen={sideBarOpen}
             setSideBarOpen={setSideBarOpen}
+            menuBarOpen={menuBarOpen} setMenuBarOpen ={setMenuBarOpen}
           />
         </header>
 
    
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 min-h-0 overflow-y-auto">
           <Outlet context={{ darkMode }} />
         </main>
 

@@ -57,7 +57,7 @@ function Customers() {
     ];
 
     return (
-        <div className={`h-full px-5 py-6 md:px-8 ${darkMode? "bg-black":"bg-[#F7F6F3]"} `}>
+        <div className={`min-h-full px-5 py-6 md:px-8 ${darkMode? "bg-black":"bg-[#F7F6F3]"} `}>
 
             <div className="mb-8">
                 <h2 className={`font-bold text-xl md:text-2xl ${darkMode?"text-white":"text-[#7E6A5A]"}`}>Customers</h2>
