@@ -1,5 +1,5 @@
 
-import { NavLink, Link ,useSearchParams } from "react-router-dom";
+import { NavLink, Link, useSearchParams } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -38,30 +38,32 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
     const [menuOpen, setMenuOpen] = useState(false);
     const [wishlistOpen, setWishlistOpen] = useState(false);
     const [cartMessage, setCartMessage] = useState(false);
-     const [isFullScreen, setIsFullScreen] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState(false);
 
-     function toggleScreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      setIsFullScreen(true);
+    function toggleScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+            setIsFullScreen(true);
+        }
+        else {
+            document.exitFullscreen();
+            setIsFullScreen(false);
+        }
     }
-    else {
-      document.exitFullscreen();
-      setIsFullScreen(false);
-    }
-  }
+
+    const totalPrice = cartItems.reduce((total,item)=>total + (item.quantity *item.price),0);
 
 
-        const [searchParams]=useSearchParams();
-    const fromAdmin=searchParams.get("from")==="admin"
+    const [searchParams] = useSearchParams();
+    const fromAdmin = searchParams.get("from") === "admin"
 
     return (
         <>
 
             <div
                 className={`fixed top-0 left-0 w-full h-16 z-50 flex justify-between items-center px-5 md:px-7 shadow-sm transition-colors duration-300 ${darkMode
-                        ? "bg-black text-white"
-                        : "bg-[#EAE9E5] text-black"
+                    ? "bg-black text-white"
+                    : "bg-[#EAE9E5] text-black"
                     }`}
             >
 
@@ -174,8 +176,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                     <div
                         className={`hidden md:flex border rounded-md px-2 py-1 gap-2 w-[180px] items-center transition-colors ${darkMode
-                                ? "border-gray-600 bg-gray-800"
-                                : "border-gray-400 bg-white"
+                            ? "border-gray-600 bg-gray-800"
+                            : "border-gray-400 bg-white"
                             }`}
                     >
                         <SearchIcon
@@ -191,8 +193,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                             type="text"
                             placeholder="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                             className={`placeholder:text-[13px] focus:outline-none bg-transparent w-full ${darkMode
-                                    ? "text-white placeholder:text-gray-400"
-                                    : "text-black placeholder:text-gray-500"
+                                ? "text-white placeholder:text-gray-400"
+                                : "text-black placeholder:text-gray-500"
                                 }`}
                         />
                     </div>
@@ -201,8 +203,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                     <button
                         onClick={toggleDarkMode}
                         className={`cursor-pointer transition-colors ${darkMode
-                                ? "text-white"
-                                : "text-gray-800"
+                            ? "text-white"
+                            : "text-gray-800"
                             }`}
                     >
                         {darkMode ? (
@@ -212,11 +214,11 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                         )}
                     </button>
 
-                      <button
+                    <button
                         onClick={toggleScreen}
                         className={`cursor-pointer transition-colors hidden md:block ${darkMode
-                                ? "text-white"
-                                : "text-gray-800"
+                            ? "text-white"
+                            : "text-gray-800"
                             }`}
                     >
                         {isFullScreen ? (
@@ -240,8 +242,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                         <span
                             className={`absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center text-[11px] font-sm text-white ${darkMode
-                                    ? "bg-[#7E6A5A]"
-                                    : "bg-[#B5A69A]"
+                                ? "bg-[#7E6A5A]"
+                                : "bg-[#B5A69A]"
                                 }`}
                         >
                             {cartCount}
@@ -262,8 +264,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                         <span
                             className={`absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center text-[11px] font-sm text-white ${darkMode
-                                    ? "bg-[#7E6A5A]"
-                                    : "bg-[#B5A69A]"
+                                ? "bg-[#7E6A5A]"
+                                : "bg-[#B5A69A]"
                                 }`}
                         >
                             {wishlist.length}
@@ -271,15 +273,15 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                     </button>
 
 
-                    {fromAdmin&&(
+                    {fromAdmin && (
                         <div className="bg-[#7E6A5A]  rounded-lg gap-1 items-center ">
                             <Link className="text-white flex p-1 text-sm font-medium" to="/dashboard">
-                            <ArrowLeft/>Back to Admin panel
+                                <ArrowLeft />Back to Admin panel
                             </Link>
-                            </div>
+                        </div>
                     )}
 
-                  
+
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className={`md:hidden ${darkMode ? "text-white" : "text-black"
@@ -294,8 +296,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
             {menuOpen && (
                 <div
                     className={`fixed top-16 left-0 w-full z-40 shadow-md md:hidden transition-colors duration-300 ${darkMode
-                            ? "bg-black text-white"
-                            : "bg-[#EAE9E5] text-black"
+                        ? "bg-black text-white"
+                        : "bg-[#EAE9E5] text-black"
                         }`}
                 >
                     <div className="flex flex-col px-7 py-4 gap-2">
@@ -337,8 +339,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                     <div
                         className={`absolute right-0 top-0 h-full w-[280px] md:w-[350px] shadow-xl px-7 md:px-10 py-7 overflow-y-auto transition-colors duration-300 ${darkMode
-                                ? "bg-black text-white"
-                                : "bg-white text-black"
+                            ? "bg-black text-white"
+                            : "bg-white text-black"
                             }`}
                     >
                         <div className="flex items-center justify-between">
@@ -364,8 +366,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                             {cartItems.length === 0 ? (
                                 <p
                                     className={`text-center mx-5 py-2 font-semibold animate__animated animate__pulse ${darkMode
-                                            ? "bg-gray-800 text-white"
-                                            : "bg-[#DFDDD8] text-black"
+                                        ? "bg-gray-800 text-white"
+                                        : "bg-[#DFDDD8] text-black"
                                         }`}
                                 >
                                     Your cart is empty
@@ -404,8 +406,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                             )
                                                         }
                                                         className={`text-xs border px-2 py-1 rounded-sm font-bold transition duration-300 hover:scale-105 ${darkMode
-                                                                ? "border-gray-600 hover:bg-gray-800"
-                                                                : "border-gray-400 hover:bg-gray-100"
+                                                            ? "border-gray-600 hover:bg-gray-800"
+                                                            : "border-gray-400 hover:bg-gray-100"
                                                             }`}
                                                     >
                                                         Remove
@@ -425,6 +427,15 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                 </div>
                             )}
                         </div>
+
+                        <div className="flex justify-between gap-2 mt-5">
+                        <button className={`text-sm px-3 py-1 rounded-sm  border  font-bold
+                                             text-nowrap ${darkMode?"text-white":"text-black"}`}>Total price : <span className="font-semibold">₹{totalPrice}</span></button>
+                        <Link to="/payoption" onClick={()=>setCartOpen(false)}
+                        className="text-[13px] px-4  md:px-6 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
+                                   duration-300 hover:scale-105 text-nowrap">Buy Now</Link>
+
+                    </div>
                     </div>
                 </div>
             )}
@@ -440,8 +451,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                     <div
                         className={`absolute right-0 top-0 h-full w-[280px] md:w-[350px] shadow-xl px-7 md:px-10 py-7 overflow-y-auto transition-colors duration-300 ${darkMode
-                                ? "bg-black text-white"
-                                : "bg-white text-black"
+                            ? "bg-black text-white"
+                            : "bg-white text-black"
                             }`}
                     >
                         <div className="flex items-center justify-between">
@@ -468,8 +479,8 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                             {wishlist.length === 0 ? (
                                 <p
                                     className={`text-center mx-5 py-2 font-semibold animate__animated animate__pulse ${darkMode
-                                            ? "bg-gray-800 text-white"
-                                            : "bg-[#DFDDD8] text-black"
+                                        ? "bg-gray-800 text-white"
+                                        : "bg-[#DFDDD8] text-black"
                                         }`}
                                 >
                                     Your wishlist is empty
