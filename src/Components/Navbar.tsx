@@ -28,10 +28,11 @@ interface NavBarProps {
     setSearchTerm: (value: string) => void;
     darkMode: boolean;
     toggleDarkMode: () => void;
+    updateQuantity: (productId: number, change: number) => void;
 }
 
 function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, wishlist,
-    toggleWishlist, addToCart, searchTerm, setSearchTerm, darkMode, toggleDarkMode }
+    toggleWishlist, addToCart, searchTerm, setSearchTerm, darkMode, toggleDarkMode ,updateQuantity}
     : NavBarProps) {
 
 
@@ -51,7 +52,7 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
         }
     }
 
-    const totalPrice = cartItems.reduce((total,item)=>total + (item.quantity *item.price),0);
+    const totalPrice = cartItems.reduce((total,item)=>total + item.price ,0);
 
 
     const [searchParams] = useSearchParams();
@@ -397,6 +398,37 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                 <p className="text-sm text-gray-500">
                                                     Quantity: {item.quantity}
                                                 </p>
+
+                                                
+<div className="flex items-center gap-4 mt-2">
+    <button
+        className={`border px-3 py-1 ${
+            darkMode
+                ? "border-gray-500 text-white"
+                : "border-gray-300 text-black"
+        }`}
+        onClick={() => updateQuantity(item.id, -1)}
+        disabled={item.quantity === 1}
+    >
+        -
+    </button>
+
+    <span>{item.quantity}</span>
+
+    <button
+        className={`border px-3 py-1 ${
+            darkMode
+                ? "border-gray-500 text-white"
+                : "border-gray-300 text-black"
+        }`}
+        onClick={() => updateQuantity(item.id, 1)}
+    >
+        +
+    </button>
+</div>
+
+                                                
+
 
                                                 <div className="flex gap-2 mt-3 md:gap-5">
                                                     <button
