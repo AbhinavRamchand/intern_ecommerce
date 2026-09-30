@@ -9,10 +9,10 @@ import Trends from './Pages/Trends'
 import Blog from './Pages/Blog'
 import Signup from './Pages/Signup';
 import Payoption from './Components/payoption';
-import Adminlayout from './Adminpanel/Adminlayout'
-import Dashboard from './Adminpanel/Dashboard'
-import Categories from './Adminpanel/Categories'
-import Customers from './Adminpanel/Customers'
+import Adminlayout from './AdminPanel/Adminlayout'
+import Dashboard from './AdminPanel/Dashboard'
+import Categories from './AdminPanel/Categories'
+import Customers from './AdminPanel/Customers'
 
 function App() {
   return (
