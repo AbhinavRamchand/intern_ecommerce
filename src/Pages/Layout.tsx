@@ -71,6 +71,24 @@ function Layout() {
         );
     };
 
+ 
+const updateQuantity = (productId: number, change: number) => {
+    setCartItems((currentItems) =>
+        currentItems.map((item) => {
+            if (item.id !== productId) return item;
+
+            const newQuantity = Math.max(1, item.quantity + change);
+            const unitPrice = item.price / item.quantity;
+
+            return {
+                ...item,
+                quantity: newQuantity,
+                price: unitPrice * newQuantity,
+            };
+        })
+    );
+};
+
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
     const toggleWishlist = (product: Product) => {
@@ -92,7 +110,7 @@ function Layout() {
         <div className="flex flex-col min-h-screen">
             <NavBar cartCount={cartCount} cartItems={cartItems} cartOpen={cartOpen} setCartOpen={setCartOpen}
                 removeFromCart={removeFromCart} wishlist={wishlist} toggleWishlist={toggleWishlist} addToCart={addToCart}
-                searchTerm={searchTerm} setSearchTerm={setSearchTerm} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+                searchTerm={searchTerm} setSearchTerm={setSearchTerm} darkMode={darkMode} toggleDarkMode={toggleDarkMode}  updateQuantity={updateQuantity}/>
             <div className="flex-1 pt-16">
                 <Outlet context={{ addToCart, wishlist, toggleWishlist, searchTerm, darkMode }} />
 
