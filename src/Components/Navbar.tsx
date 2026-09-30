@@ -12,6 +12,7 @@ import type { CartItem, Product } from "../Data/Product";
 import CheckIcon from '@mui/icons-material/Check';
 import { Fullscreen, FullscreenExit } from "@mui/icons-material";
 import { ArrowLeft } from "lucide-react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 interface NavBarProps {
@@ -29,10 +30,18 @@ interface NavBarProps {
     darkMode: boolean;
     toggleDarkMode: () => void;
     updateQuantity: (productId: number, change: number) => void;
+     user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
+interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
 }
 
 function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, wishlist,
-    toggleWishlist, addToCart, searchTerm, setSearchTerm, darkMode, toggleDarkMode ,updateQuantity}
+    toggleWishlist, addToCart, searchTerm, setSearchTerm, darkMode, toggleDarkMode, updateQuantity,user,setUser }
     : NavBarProps) {
 
 
@@ -52,11 +61,17 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
         }
     }
 
-    const totalPrice = cartItems.reduce((total,item)=>total + item.price ,0);
+    const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
 
 
     const [searchParams] = useSearchParams();
     const fromAdmin = searchParams.get("from") === "admin"
+
+
+    function handleLogout(){
+       localStorage.removeItem("user");
+       setUser(null);
+    }
 
     return (
         <>
@@ -198,6 +213,26 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                 : "text-black placeholder:text-gray-500"
                                 }`}
                         />
+                    </div>
+
+                    <div className="flex gap-2 group relative">
+                        <AccountCircleIcon />
+                        {user ? (<h2>{user.firstName}</h2>) : <Link to="/login">Login</Link>}
+                        
+                        <div className="hidden group-hover:block absolute top-9 right-0 bg-white
+                         rounded-sm  p-5 w-[250px] shadow-md">
+                            <div className="absolute -top-3 right-0 w-full h-3" />
+
+                            <div className="flex justify-between items-center">
+                            <p className="text-[15px]">New Customer?</p>
+                            <Link to="/signup" className="font-bold text-[#5a4a3a] ">SIGN UP</Link>
+                            </div>
+
+                            <button onClick={handleLogout} className="mt-5 px-3 py-1 text-white text-[14px]   rounded-md bg-[#5a4a3a]
+                             ">Logout</button>
+                            
+                        </div>
+
                     </div>
 
 
@@ -374,100 +409,102 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                     Your cart is empty
                                 </p>
                             ) : (
-                                <div className="flex flex-col gap-5">
-                                    {cartItems.map((item) => (
-                                        <div
-                                            key={item.id}
-                                            className="flex gap-5 border-b border-gray-400 pb-4"
-                                        >
-                                            <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="h-20 w-16 object-contain"
-                                            />
 
-                                            <div className="flex flex-1 flex-col">
-                                                <h3 className="text-[11px] md:text-sm font-medium text-[#B5A69A]">
-                                                    {item.name}
-                                                </h3>
+                                <div>
+                                    <div className="flex flex-col gap-5">
+                                        {cartItems.map((item) => (
+                                            <div
+                                                key={item.id}
+                                                className="flex gap-5 border-b border-gray-400 pb-4"
+                                            >
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    className="h-20 w-16 object-contain"
+                                                />
 
-                                                <p className="text-sm text-gray-500 my-1">
-                                                    ₹{item.price}
-                                                </p>
+                                                <div className="flex flex-1 flex-col">
+                                                    <h3 className="text-[11px] md:text-sm font-medium text-[#B5A69A]">
+                                                        {item.name}
+                                                    </h3>
 
-                                                <p className="text-sm text-gray-500">
-                                                    Quantity: {item.quantity}
-                                                </p>
+                                                    <p className="text-sm text-gray-500 my-1">
+                                                        ₹{item.price}
+                                                    </p>
 
-                                                
-<div className="flex items-center gap-4 mt-2">
-    <button
-        className={`border px-3 py-1 ${
-            darkMode
-                ? "border-gray-500 text-white"
-                : "border-gray-300 text-black"
-        }`}
-        onClick={() => updateQuantity(item.id, -1)}
-        disabled={item.quantity === 1}
-    >
-        -
-    </button>
-
-    <span>{item.quantity}</span>
-
-    <button
-        className={`border px-3 py-1 ${
-            darkMode
-                ? "border-gray-500 text-white"
-                : "border-gray-300 text-black"
-        }`}
-        onClick={() => updateQuantity(item.id, 1)}
-    >
-        +
-    </button>
-</div>
-
-                                                
+                                                    <p className="text-sm text-gray-500">
+                                                        Quantity: {item.quantity}
+                                                    </p>
 
 
-                                                <div className="flex gap-2 mt-3 md:gap-5">
-                                                    <button
-                                                        onClick={() =>
-                                                            removeFromCart(
-                                                                item.id
-                                                            )
-                                                        }
-                                                        className={`text-xs border px-2 py-1 rounded-sm font-bold transition duration-300 hover:scale-105 ${darkMode
-                                                            ? "border-gray-600 hover:bg-gray-800"
-                                                            : "border-gray-400 hover:bg-gray-100"
-                                                            }`}
-                                                    >
-                                                        Remove
-                                                    </button>
+                                                    <div className="flex items-center gap-4 mt-2">
+                                                        <button
+                                                            className={`border px-3 py-1 ${darkMode
+                                                                ? "border-gray-500 text-white"
+                                                                : "border-gray-300 text-black"
+                                                                }`}
+                                                            onClick={() => updateQuantity(item.id, -1)}
+                                                            disabled={item.quantity === 1}
+                                                        >
+                                                            -
+                                                        </button>
 
-                                                    <Link
-                                                        to="/payoption" onClick={() => setCartOpen(false)}
-                                                        className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
+                                                        <span>{item.quantity}</span>
+
+                                                        <button
+                                                            className={`border px-3 py-1 ${darkMode
+                                                                ? "border-gray-500 text-white"
+                                                                : "border-gray-300 text-black"
+                                                                }`}
+                                                            onClick={() => updateQuantity(item.id, 1)}
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+
+
+
+
+                                                    <div className="flex gap-2 mt-3 md:gap-5">
+                                                        <button
+                                                            onClick={() =>
+                                                                removeFromCart(
+                                                                    item.id
+                                                                )
+                                                            }
+                                                            className={`text-xs border px-2 py-1 rounded-sm font-bold transition duration-300 hover:scale-105 ${darkMode
+                                                                ? "border-gray-600 hover:bg-gray-800"
+                                                                : "border-gray-400 hover:bg-gray-100"
+                                                                }`}
+                                                        >
+                                                            Remove
+                                                        </button>
+
+                                                        <Link
+                                                            to="/payoption" onClick={() => setCartOpen(false)}
+                                                            className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
                                                         duration-300 hover:scale-105 text-nowrap"
-                                                    >
-                                                        Buy Now
-                                                    </Link>
+                                                        >
+                                                            Buy Now
+                                                        </Link>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
+
+                                    <div className="flex justify-between gap-2 mt-5">
+                                        <button className={`text-sm px-3 py-1 rounded-sm  border  font-bold
+                                             text-nowrap ${darkMode ? "text-white" : "text-black"}`}>Total price : <span className="font-semibold">₹{totalPrice}</span></button>
+                                        <Link to="/payoption" onClick={() => setCartOpen(false)}
+                                            className="text-[13px] px-4  md:px-6 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
+                                   duration-300 hover:scale-105 text-nowrap">Buy Now</Link>
+
+                                    </div>
+
                                 </div>
                             )}
                         </div>
-
-                        <div className="flex justify-between gap-2 mt-5">
-                        <button className={`text-sm px-3 py-1 rounded-sm  border  font-bold
-                                             text-nowrap ${darkMode?"text-white":"text-black"}`}>Total price : <span className="font-semibold">₹{totalPrice}</span></button>
-                        <Link to="/payoption" onClick={()=>setCartOpen(false)}
-                        className="text-[13px] px-4  md:px-6 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
-                                   duration-300 hover:scale-105 text-nowrap">Buy Now</Link>
-
-                    </div>
                     </div>
                 </div>
             )}

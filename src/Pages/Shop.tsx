@@ -8,18 +8,25 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
+interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
 type ShopContext = {
     addToCart: (product: Product, quantity: number) => void;
     wishlist: Product[];
     toggleWishlist: (product: Product) => void;
     searchTerm: string;
-     darkMode: boolean;
+    darkMode: boolean;
+    user: User | null;
 }
 
 function Shop() {
-    const { addToCart, wishlist, toggleWishlist,searchTerm, darkMode } = useOutletContext<ShopContext>();
+    const { addToCart, wishlist, toggleWishlist, searchTerm, darkMode, user } = useOutletContext<ShopContext>();
 
     const [selectedCategory, setSelectedCategory] = useState("all");
 
@@ -29,9 +36,9 @@ function Shop() {
     const [quantity, setQuantity] = useState(1);
 
     const [showMessage, setShowMessage] = useState(false);
+    const navigate = useNavigate();
 
-
-    const filteredProducts = products.filter((product)=>{
+    const filteredProducts = products.filter((product) => {
         const category = selectedCategory === "all" ? products : product.category === selectedCategory;
 
         const search = product.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -47,27 +54,32 @@ function Shop() {
 
 
     const handleAddToCart = () => {
-
         if (!selectedProduct) return;
 
-        addToCart(selectedProduct, quantity);
+        if (user) {
 
-        setShowMessage(true);
+            addToCart(selectedProduct, quantity);
 
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 2000);
+            setShowMessage(true);
+
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 2000);
+
+        }
+        else {
+            navigate("/login");
+        }
     };
 
 
     return (
 
         <div
-            className={`p-10 min-h-screen transition-colors duration-300 ${
-                darkMode
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-            }`}
+            className={`p-10 min-h-screen transition-colors duration-300 ${darkMode
+                ? "bg-black text-white"
+                : "bg-white text-black"
+                }`}
         >
 
 
@@ -76,13 +88,12 @@ function Shop() {
 
                 <button
                     onClick={() => setSelectedCategory("all")}
-                    className={`transition duration-300 hover:border-b ${
-                        selectedCategory === "all"
-                            ? "border-b border-[#7E6A5A] text-[#7E6A5A]"
-                            : darkMode
-                                ? "text-gray-300 hover:text-[#7E6A5A]"
-                                : "text-gray-600 hover:text-[#7E6A5A]"
-                    }`}
+                    className={`transition duration-300 hover:border-b ${selectedCategory === "all"
+                        ? "border-b border-[#7E6A5A] text-[#7E6A5A]"
+                        : darkMode
+                            ? "text-gray-300 hover:text-[#7E6A5A]"
+                            : "text-gray-600 hover:text-[#7E6A5A]"
+                        }`}
                 >
                     All products
                 </button>
@@ -90,13 +101,12 @@ function Shop() {
 
                 <button
                     onClick={() => setSelectedCategory("women")}
-                    className={`transition duration-300 hover:border-b ${
-                        selectedCategory === "women"
-                            ? "border-b border-[#7E6A5A] text-[#7E6A5A]"
-                            : darkMode
-                                ? "text-gray-300 hover:text-[#7E6A5A]"
-                                : "text-gray-600 hover:text-[#7E6A5A]"
-                    }`}
+                    className={`transition duration-300 hover:border-b ${selectedCategory === "women"
+                        ? "border-b border-[#7E6A5A] text-[#7E6A5A]"
+                        : darkMode
+                            ? "text-gray-300 hover:text-[#7E6A5A]"
+                            : "text-gray-600 hover:text-[#7E6A5A]"
+                        }`}
                 >
                     Women
                 </button>
@@ -104,13 +114,12 @@ function Shop() {
 
                 <button
                     onClick={() => setSelectedCategory("men")}
-                    className={`transition duration-300 hover:border-b ${
-                        selectedCategory === "men"
-                            ? "border-b border-[#7E6A5A] text-[#7E6A5A]"
-                            : darkMode
-                                ? "text-gray-300 hover:text-[#7E6A5A]"
-                                : "text-gray-600 hover:text-[#7E6A5A]"
-                    }`}
+                    className={`transition duration-300 hover:border-b ${selectedCategory === "men"
+                        ? "border-b border-[#7E6A5A] text-[#7E6A5A]"
+                        : darkMode
+                            ? "text-gray-300 hover:text-[#7E6A5A]"
+                            : "text-gray-600 hover:text-[#7E6A5A]"
+                        }`}
                 >
                     Men
                 </button>
@@ -150,7 +159,7 @@ function Shop() {
                                 />
 
 
-                              
+
 
                                 <button
                                     onClick={() =>
@@ -201,7 +210,7 @@ function Shop() {
                                 )}
 
 
-                              
+
 
                                 <div
                                     className="absolute bottom-4 left-1/2
@@ -233,7 +242,7 @@ function Shop() {
                             </div>
 
 
-                          
+
 
                             <div
                                 className="mt-3 flex flex-col
@@ -241,11 +250,10 @@ function Shop() {
                             >
 
                                 <h2
-                                    className={`text-[14px] font-medium ${
-                                        darkMode
-                                            ? "text-white"
-                                            : "text-gray-600"
-                                    }`}
+                                    className={`text-[14px] font-medium ${darkMode
+                                        ? "text-white"
+                                        : "text-gray-600"
+                                        }`}
                                 >
                                     {product.name}
                                 </h2>
@@ -301,17 +309,16 @@ function Shop() {
                             className={`relative w-full max-w-5xl
                             mx-auto mt-2 sm:mt-5 md:mt-[50px]
                             px-8 py-6 sm:px-6 sm:py-8 md:p-10
-                            min-h-0 ${
-                                darkMode
+                            min-h-0 ${darkMode
                                     ? "bg-[#111111] text-white"
                                     : "bg-white text-black"
-                            }`}
+                                }`}
                             onClick={(e) =>
                                 e.stopPropagation()
                             }
                         >
 
-                    
+
 
                             <button
                                 onClick={() =>
@@ -353,15 +360,14 @@ function Shop() {
                                     my-2 md:my-[55px] gap-2"
                                 >
 
-                   
+
 
                                     <h1
                                         className={`text-[13px]
-                                        md:text-2xl font-bold ${
-                                            darkMode
+                                        md:text-2xl font-bold ${darkMode
                                                 ? "text-white"
                                                 : "text-gray-600"
-                                        }`}
+                                            }`}
                                     >
                                         {selectedProduct.name}
                                     </h1>
@@ -382,7 +388,7 @@ function Shop() {
                                     )}
 
 
-        
+
 
                                     <div
                                         className="flex flex-row
@@ -446,15 +452,14 @@ function Shop() {
                                     </div>
 
 
-                                 
+
 
                                     <p
                                         className={`my-5 text-[12px]
-                                        sm:text-[18px] md:text-lg ${
-                                            darkMode
+                                        sm:text-[18px] md:text-lg ${darkMode
                                                 ? "text-gray-300"
                                                 : "text-gray-500"
-                                        }`}
+                                            }`}
                                     >
                                         {selectedProduct.description}
                                     </p>
@@ -467,11 +472,10 @@ function Shop() {
                                     >
 
                                         <button
-                                            className={`border px-3 py-1 ${
-                                                darkMode
-                                                    ? "border-gray-500 text-white"
-                                                    : "border-gray-300 text-black"
-                                            }`}
+                                            className={`border px-3 py-1 ${darkMode
+                                                ? "border-gray-500 text-white"
+                                                : "border-gray-300 text-black"
+                                                }`}
                                             onClick={() =>
                                                 setQuantity(
                                                     quantity > 1
@@ -490,11 +494,10 @@ function Shop() {
 
 
                                         <button
-                                            className={`border px-3 py-1 ${
-                                                darkMode
-                                                    ? "border-gray-500 text-white"
-                                                    : "border-gray-300 text-black"
-                                            }`}
+                                            className={`border px-3 py-1 ${darkMode
+                                                ? "border-gray-500 text-white"
+                                                : "border-gray-300 text-black"
+                                                }`}
                                             onClick={() =>
                                                 setQuantity(
                                                     quantity + 1
@@ -521,11 +524,10 @@ function Shop() {
                                             md:text-base w-full
                                             sm:w-[180px]
                                             transition duration-300
-                                            hover:scale-105 cursor-pointer ${
-                                                darkMode
+                                            hover:scale-105 cursor-pointer ${darkMode
                                                     ? "bg-white text-black hover:bg-gray-300"
                                                     : "bg-[#EAE9E5] text-black hover:bg-[#D8D5CF]"
-                                            }`}
+                                                }`}
                                         >
                                             <ShoppingCartIcon
                                                 fontSize="small"
@@ -574,11 +576,10 @@ function Shop() {
                     className={`fixed bottom-6 right-10 z-[100]
                     px-4 py-2 text-[11px] md:text-[13px]
                     shadow-lg animate__animated
-                    animate__fadeInUp ${
-                        darkMode
+                    animate__fadeInUp ${darkMode
                             ? "bg-white text-black"
                             : "bg-[#EAE9E5] text-black"
-                    }`}
+                        }`}
                 >
                     Item added to the cart!
                 </div>

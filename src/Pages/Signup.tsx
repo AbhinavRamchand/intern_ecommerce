@@ -61,7 +61,7 @@ function Signup() {
 
     setMessage("Signup successful");
 
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -151,7 +151,7 @@ function Signup() {
               Already have an account?{" "}
 
               <button
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/login")}
                 type="button"
                 className="text-red-500"
               >
