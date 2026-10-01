@@ -13,6 +13,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import { Fullscreen, FullscreenExit } from "@mui/icons-material";
 import { ArrowLeft } from "lucide-react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from "react-router-dom";
+import LoginCard from "./LoginCard";
+import PersonIcon from '@mui/icons-material/Person';
 
 
 interface NavBarProps {
@@ -44,11 +47,12 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
     toggleWishlist, addToCart, searchTerm, setSearchTerm, darkMode, toggleDarkMode, updateQuantity,user,setUser }
     : NavBarProps) {
 
-
+    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [wishlistOpen, setWishlistOpen] = useState(false);
     const [cartMessage, setCartMessage] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
+    const [showLoginCard, setShowLoginCard] = useState(false);
 
     function toggleScreen() {
         if (!document.fullscreenElement) {
@@ -72,6 +76,16 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
        localStorage.removeItem("user");
        setUser(null);
     }
+
+    const handleBuyNow = () => {
+       if(!user){
+        setShowLoginCard(true);
+       }
+       else{
+        navigate("/payoption");
+       }
+    }
+
 
     return (
         <>
@@ -219,16 +233,22 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                         <AccountCircleIcon />
                         {user ? (<h2>{user.firstName}</h2>) : <Link to="/login">Login</Link>}
                         
-                        <div className="hidden group-hover:block absolute top-9 right-0 bg-white
-                         rounded-sm  p-5 w-[250px] shadow-md">
+                        <div className={`hidden group-hover:block absolute top-9 right-0
+                         rounded-sm  p-5 w-[260px] shadow-md ${darkMode?"bg-gray-800 ":"bg-white"}`}>
                             <div className="absolute -top-3 right-0 w-full h-3" />
 
                             <div className="flex justify-between items-center">
                             <p className="text-[15px]">New Customer?</p>
-                            <Link to="/signup" className="font-bold text-[#5a4a3a] ">SIGN UP</Link>
+                            <Link to="/signup" className={`font-bold ${darkMode ? "text-white" : "text-[#5a4a3a]"}`}>SIGN UP</Link>
                             </div>
 
-                            <button onClick={handleLogout} className="mt-5 px-3 py-1 text-white text-[14px]   rounded-md bg-[#5a4a3a]
+                            <div className="flex gap-2 mt-5 items-center">
+                                <PersonIcon />
+                                <p>My Profile</p>
+                            </div>
+
+                            <button onClick={handleLogout} className="mt-5 px-3 py-1 text-white text-[14px]
+                               rounded-md bg-[#5a4a3a] inline-block
                              ">Logout</button>
                             
                         </div>
@@ -480,13 +500,16 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                             Remove
                                                         </button>
 
-                                                        <Link
-                                                            to="/payoption" onClick={() => setCartOpen(false)}
+                                                        <button
+                                                            onClick={() => {
+                                                                setCartOpen(false);
+                                                                handleBuyNow();
+                                                            }}
                                                             className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
                                                         duration-300 hover:scale-105 text-nowrap"
                                                         >
                                                             Buy Now
-                                                        </Link>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -495,10 +518,15 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                                     <div className="flex justify-between gap-2 mt-5">
                                         <button className={`text-sm px-3 py-1 rounded-sm  border  font-bold
-                                             text-nowrap ${darkMode ? "text-white" : "text-black"}`}>Total price : <span className="font-semibold">₹{totalPrice}</span></button>
-                                        <Link to="/payoption" onClick={() => setCartOpen(false)}
+                                             text-nowrap ${darkMode ? "text-white" : "text-black"}`}>Total price : 
+                                             <span className="font-semibold">₹{totalPrice}</span></button>
+                                             
+                                        <button onClick={() => {
+                                            setCartOpen(false);
+                                            handleBuyNow();
+                                        }}
                                             className="text-[13px] px-4  md:px-6 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
-                                   duration-300 hover:scale-105 text-nowrap">Buy Now</Link>
+                                   duration-300 hover:scale-105 text-nowrap">Buy Now</button>
 
                                     </div>
 
@@ -603,10 +631,13 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                     </div>
 
 
-                                                    <Link to="/payoption" onClick={() => setWishlistOpen(false)} className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a]                                                        
+                                                    <button onClick={() => {
+                                                        setWishlistOpen(false);
+                                                        handleBuyNow();
+                                                    }} className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a]                                                        
                                                         text-white  transition duration-300 hover:scale-105  text-nowrap text-center w-[150px] ">
                                                         Buy Now
-                                                    </Link>
+                                                    </button>
 
                                                 </div>
                                             </div>
@@ -625,6 +656,23 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                     <p className="text-[11px] md:text-[13px] font-semibold text-gray-800">
                         <CheckIcon fontSize="small" /> Product added to cart
                     </p>
+                </div>
+            )}
+
+             {showLoginCard && (
+                <div className="fixed inset-0 z-[100] bg-black/60">
+                    <div className="absolute top-0 right-0 p-4 w-[300px] md:w-[400px] h-full bg-white shadow-lg p-10">
+
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-[16px] md:text-[18px] font-semibold">Log in to complete your shopping</h2>
+                            <button onClick={() => setShowLoginCard(false)} className="text-2xl cursor-pointer hover:opacity-70">
+                                &times;
+                            </button>
+                        </div>
+
+                        <LoginCard darkMode={darkMode} user={user} setUser={setUser} onClose={() => setShowLoginCard(false)}/>
+                    </div>
+
                 </div>
             )}
 

@@ -7,8 +7,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import LoginCard from "../Components/LoginCard";
 
 
 interface User {
@@ -23,10 +23,11 @@ type ShopContext = {
     searchTerm: string;
     darkMode: boolean;
     user: User | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 function Shop() {
-    const { addToCart, wishlist, toggleWishlist, searchTerm, darkMode, user } = useOutletContext<ShopContext>();
+    const { addToCart, wishlist, toggleWishlist, searchTerm, darkMode, user, setUser } = useOutletContext<ShopContext>();
 
     const [selectedCategory, setSelectedCategory] = useState("all");
 
@@ -35,7 +36,9 @@ function Shop() {
 
     const [quantity, setQuantity] = useState(1);
 
+
     const [showMessage, setShowMessage] = useState(false);
+    const [showLoginCard, setShowLoginCard] = useState(false);
     const navigate = useNavigate();
 
     const filteredProducts = products.filter((product) => {
@@ -56,21 +59,23 @@ function Shop() {
     const handleAddToCart = () => {
         if (!selectedProduct) return;
 
-        if (user) {
+        addToCart(selectedProduct, quantity);
 
-            addToCart(selectedProduct, quantity);
+        setShowMessage(true);
 
-            setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 2000);
+    };
 
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 2000);
-
+    const handleBuyNow = () => {
+        if (!user) {
+            setShowLoginCard(true);
         }
         else {
-            navigate("/login");
+            navigate("/payoption");
         }
-    };
+    }
 
 
     return (
@@ -537,8 +542,7 @@ function Shop() {
                                         </button>
 
 
-                                        <Link
-                                            to="/payoption"
+                                        <button onClick={handleBuyNow}
                                             className="px-2 py-2 w-full
                                             sm:w-[180px] md:px-8
                                             md:py-2 bg-[#7E6A5A]
@@ -551,7 +555,8 @@ function Shop() {
                                         >
                                             Buy at &#8377;
                                             {selectedProduct.price * quantity}
-                                        </Link>
+                                        </button>
+
 
                                     </div>
 
@@ -584,6 +589,23 @@ function Shop() {
                     Item added to the cart!
                 </div>
 
+            )}
+
+            {showLoginCard && (
+                <div className="fixed inset-0 z-[100] bg-black/60">
+                    <div className="absolute top-0 right-0 p-4 w-[300px] md:w-[400px] h-full bg-white shadow-lg p-10">
+
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-[16px] md:text-[18px] font-semibold">Log in to complete your shopping</h2>
+                            <button onClick={() => setShowLoginCard(false)} className="text-2xl cursor-pointer hover:opacity-70">
+                                &times;
+                            </button>
+                        </div>
+
+                        <LoginCard darkMode={darkMode} user={user} setUser={setUser} onClose={() => setShowLoginCard(false)}/>
+                    </div>
+
+                </div>
             )}
 
         </div>

@@ -13,6 +13,8 @@ function Payoption() {
     const [orderPlaced, setOrderPlaced] = useState<boolean>(false);
 
     const { darkMode } = useOutletContext<{ darkMode: boolean }>();
+    
+
 
     return (
         <div
@@ -265,15 +267,15 @@ function Payoption() {
                                 <div className="flex justify-between items-center mb-5">
 
                                     <p className="text-lg">
-                                        MRP
+                                        MRP 
 
                                         <span className="text-sm ml-1 text-gray-500">
                                             (incl. of all taxes)
                                         </span>
                                     </p>
 
-                                    <p className="text-lg">
-                                        ₹
+                                    <p className="text-lg strike-through text-gray-500">
+                                        ₹ 
                                     </p>
 
                                 </div>
@@ -282,7 +284,7 @@ function Payoption() {
                                 <div className="flex justify-between items-center pb-4 border-b border-dashed border-gray-400">
 
                                     <p className="text-lg">
-                                        Fees
+                                        Discount on MRP
                                     </p>
 
                                     <p className="text-lg">
@@ -302,7 +304,7 @@ function Payoption() {
                                         ₹
                                     </p>
 
-                                </div>
+                                </div>  
 
                             </div>
 

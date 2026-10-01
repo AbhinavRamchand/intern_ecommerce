@@ -130,7 +130,7 @@ const updateQuantity = (productId: number, change: number) => {
                 searchTerm={searchTerm} setSearchTerm={setSearchTerm} darkMode={darkMode} toggleDarkMode={toggleDarkMode} 
                  updateQuantity={updateQuantity} user ={user} setUser={setUser} />
             <div className="flex-1 pt-16">
-                <Outlet context={{ addToCart, wishlist, toggleWishlist, searchTerm, darkMode,user }} />
+                <Outlet context={{ addToCart, wishlist, toggleWishlist, searchTerm, darkMode,user,setUser }} />
 
                 <Footer darkMode={darkMode} />
 
