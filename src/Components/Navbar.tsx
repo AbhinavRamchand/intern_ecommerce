@@ -114,7 +114,7 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                     <div className="hidden md:flex md:gap-5 lg:gap-7">
                         <NavLink
-                            to="/home"
+                            to="/"
                             className={({ isActive }) =>
                                 `md:text-[13px] lg:text-[15px] font-medium transition-colors ${darkMode
                                     ? "text-white hover:text-gray-300"
