@@ -32,7 +32,8 @@ function Login() {
         const user = data.users.find((user: User) => user.email === email && user.password === password);
 
         if (user) {
-            navigate("/home");
+            localStorage.setItem("user",JSON.stringify(user));
+            navigate("/");
         } else {
             const emailExists = data.users.some((user: User) => user.email === email);
             if (emailExists) {

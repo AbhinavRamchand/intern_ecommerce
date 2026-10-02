@@ -8,7 +8,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import { useNavigate } from "react-router-dom";
 import {Link } from "react-router-dom"
 import { Fullscreen, FullscreenExit } from "@mui/icons-material";
-import { useState } from "react";
+import { useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 
 
@@ -24,7 +24,6 @@ interface NavbarProps{
 
 
 function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode,menuBarOpen,setMenuBarOpen}:NavbarProps){
-
 
     const navigate=useNavigate();
 
@@ -87,7 +86,7 @@ function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode,menuBarOpen,set
                     </button>
 
 
-            <Link to="/Home?from=admin"
+            <Link to="/?from=admin"
                 
                 className="
                   bg-[#7E6A5A]
@@ -104,7 +103,7 @@ function Navbar({sideBarOpen,setSideBarOpen,darkMode,setDarkMode,menuBarOpen,set
               </Link>
 
               <button
-                onClick={()=>navigate("/")}
+                onClick={()=>navigate("/login")}
                 className={`
                   
                  ${darkMode?"bg-white text-black":  "text-white bg-black"}
