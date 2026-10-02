@@ -244,7 +244,9 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                             <div className="flex gap-2 mt-5 items-center">
                                 <PersonIcon />
-                                <p>My Profile</p>
+                                <Link to="/profile" className={`${darkMode ? "text-white" : "text-black"}`}>
+                                    My Profile
+                                </Link>
                             </div>
 
                             <button onClick={handleLogout} className="mt-5 px-3 py-1 text-white text-[14px]

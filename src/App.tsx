@@ -13,6 +13,7 @@ import Adminlayout from './AdminPanel/Adminlayout'
 import Dashboard from './AdminPanel/Dashboard'
 import Categories from './AdminPanel/Categories'
 import Customers from './AdminPanel/Customers'
+import Profile from './Pages/Profile'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/trends" element={<Trends />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/payoption" element={<Payoption />} />
+          <Route path="/profile" element={<Profile />} />
 
         </Route>
 
