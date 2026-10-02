@@ -73,7 +73,9 @@ function Shop() {
             setShowLoginCard(true);
         }
         else {
-            navigate("/payoption");
+            navigate("/payoption",{state:{
+                totalAmount:selectedProduct!.price * quantity
+            }});
         }
     }
 

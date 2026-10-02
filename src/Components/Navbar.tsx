@@ -77,12 +77,12 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
        setUser(null);
     }
 
-    const handleBuyNow = () => {
+    const handleBuyNow = (price: number) => {
        if(!user){
         setShowLoginCard(true);
        }
        else{
-        navigate("/payoption");
+        navigate("/payoption", { state: { totalAmount: price} });
        }
     }
 
@@ -358,28 +358,90 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                 >
                     <div className="flex flex-col px-7 py-4 gap-2">
 
-                        {["home", "shop", "trends", "blog", "about"].map(
-                            (page) => (
-                                <NavLink
-                                    key={page}
-                                    to={`/${page}`}
-                                    onClick={() => setMenuOpen(false)}
-                                    className={({ isActive }) =>
-                                        `font-medium text-sm py-2 px-4 rounded-md capitalize transition-colors ${darkMode
-                                            ? "text-white hover:text-gray-300 hover:bg-gray-800"
-                                            : "text-black hover:text-[#5C4D42] hover:bg-[#F5F5F5]"
-                                        } ${isActive
-                                            ? darkMode
-                                                ? "text-[#B5A69A]"
-                                                : "text-[#5C4D42]"
-                                            : ""
-                                        }`
-                                    }
-                                >
-                                    {page}
-                                </NavLink>
-                            )
-                        )}
+                         <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                `font-medium text-sm py-2 px-4 rounded-md capitalize transition-colors ${darkMode
+                                    ? "text-white hover:text-gray-300 hover:bg-gray-800"
+                                    : "text-black hover:text-[#5C4D42] hover:bg-[#f5f5f5]"
+                                } ${isActive
+                                    ? darkMode
+                                        ? "text-[#B5A69A]"
+                                        : "text-[#5C4D42]"
+                                    : ""
+                                }`
+                            }
+                        >
+                            Home
+                        </NavLink>
+
+                        <NavLink
+                            to="/shop"
+                            className={({ isActive }) =>
+                               `font-medium text-sm py-2 px-4 rounded-md capitalize transition-colors ${darkMode
+                                    ? "text-white hover:text-gray-300 hover:bg-gray-800"
+                                    : "text-black hover:text-[#5C4D42] hover:bg-[#f5f5f5]"
+                                } ${isActive
+                                    ? darkMode
+                                        ? "text-[#B5A69A]"
+                                        : "text-[#5C4D42]"
+                                    : ""
+                                }`
+                            }
+                        >
+                            Shop
+                        </NavLink>
+
+                        <NavLink
+                            to="/trends"
+                                className={({ isActive }) =>
+                                  `font-medium text-sm py-2 px-4 rounded-md capitalize transition-colors ${darkMode
+                                    ? "text-white hover:text-gray-300 hover:bg-gray-800"
+                                    : "text-black hover:text-[#5C4D42] hover:bg-[#f5f5f5]"
+                                } ${isActive
+                                    ? darkMode
+                                        ? "text-[#B5A69A]"
+                                        : "text-[#5C4D42]"
+                                    : ""
+                                }`
+                            }
+                        >
+                            Trends
+                        </NavLink>
+
+                        <NavLink
+                            to="/blog"
+                            className={({ isActive }) =>
+                                `font-medium text-sm py-2 px-4 rounded-md capitalize transition-colors ${darkMode
+                                    ? "text-white hover:text-gray-300 hover:bg-gray-800"
+                                    : "text-black hover:text-[#5C4D42] hover:bg-[#f5f5f5]"
+                                } ${isActive
+                                    ? darkMode
+                                        ? "text-[#B5A69A]"
+                                        : "text-[#5C4D42]"
+                                    : ""
+                                }`
+                            }
+                        >
+                            Blog
+                        </NavLink>
+
+                        <NavLink
+                            to="/about"
+                            className={({ isActive }) =>
+                                `font-medium text-sm py-2 px-4 rounded-md capitalize transition-colors ${darkMode
+                                    ? "text-white hover:text-gray-300 hover:bg-gray-800"
+                                    : "text-black hover:text-[#5C4D42] hover:bg-[#f5f5f5]"
+                                } ${isActive
+                                    ? darkMode
+                                        ? "text-[#B5A69A]"
+                                        : "text-[#5C4D42]"
+                                    : ""
+                                }`
+                            }
+                        >
+                            About
+                        </NavLink>
                     </div>
                 </div>
             )}
@@ -503,7 +565,7 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                                         <button
                                                             onClick={() => {
                                                                 setCartOpen(false);
-                                                                handleBuyNow();
+                                                                handleBuyNow(item.price);
                                                             }}
                                                             className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
                                                         duration-300 hover:scale-105 text-nowrap"
@@ -523,7 +585,7 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
                                              
                                         <button onClick={() => {
                                             setCartOpen(false);
-                                            handleBuyNow();
+                                            handleBuyNow(totalPrice);
                                         }}
                                             className="text-[13px] px-4  md:px-6 py-1 rounded-sm font-bold bg-[#5a4a3a] text-white transition 
                                    duration-300 hover:scale-105 text-nowrap">Buy Now</button>
@@ -633,7 +695,7 @@ function NavBar({ cartCount, cartItems, cartOpen, setCartOpen, removeFromCart, w
 
                                                     <button onClick={() => {
                                                         setWishlistOpen(false);
-                                                        handleBuyNow();
+                                                        handleBuyNow(item.price);
                                                     }} className="text-xs px-2 py-1 rounded-sm font-bold bg-[#5a4a3a]                                                        
                                                         text-white  transition duration-300 hover:scale-105  text-nowrap text-center w-[150px] ">
                                                         Buy Now

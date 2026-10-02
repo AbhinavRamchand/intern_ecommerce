@@ -4,7 +4,7 @@ import { SiPhonepe } from "react-icons/si";
 import gpay from "../assets/google-pay.png";
 import upi from "../assets/upi.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useLocation, useOutletContext } from "react-router-dom";
 import { Check } from "lucide-react";
 
 function Payoption() {
@@ -13,6 +13,10 @@ function Payoption() {
     const [orderPlaced, setOrderPlaced] = useState<boolean>(false);
 
     const { darkMode } = useOutletContext<{ darkMode: boolean }>();
+
+    const location = useLocation();
+   const totalAmount = location.state?.totalAmount ?? 0;
+  
     
 
 
@@ -266,7 +270,7 @@ function Payoption() {
                             
                                 <div className="flex justify-between items-center mb-5">
 
-                                    <p className="text-lg">
+                                    <p className="text-lg text-gray-500">
                                         MRP 
 
                                         <span className="text-sm ml-1 text-gray-500">
@@ -274,24 +278,13 @@ function Payoption() {
                                         </span>
                                     </p>
 
-                                    <p className="text-lg strike-through text-gray-500">
-                                        ₹ 
+                                    <p className="text-lg text-gray-500">
+                                        ₹ {totalAmount}
                                     </p>
 
                                 </div>
 
-                 
-                                <div className="flex justify-between items-center pb-4 border-b border-dashed border-gray-400">
-
-                                    <p className="text-lg">
-                                        Discount on MRP
-                                    </p>
-
-                                    <p className="text-lg">
-                                        ₹
-                                    </p>
-
-                                </div>
+            
 
                              
                                 <div className="flex justify-between items-center pt-5">
@@ -301,7 +294,7 @@ function Payoption() {
                                     </p>
 
                                     <p className="text-2xl font-bold">
-                                        ₹
+                                        ₹{totalAmount}
                                     </p>
 
                                 </div>  
@@ -316,7 +309,7 @@ function Payoption() {
                             <div className="flex gap-2 items-center">
 
                                 <p className="font-medium">
-                                    ₹
+                                    ₹{totalAmount}
                                 </p>
 
                                 <button
