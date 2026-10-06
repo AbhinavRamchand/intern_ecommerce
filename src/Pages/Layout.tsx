@@ -5,6 +5,12 @@ import { useEffect, useState } from "react";
 import type { CartItem, Product } from "../Data/Product";
 
 
+interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
 
 function Layout() {
     const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -24,6 +30,17 @@ function Layout() {
         const saveMode = localStorage.getItem("darkMode")
         return saveMode === "true"
     });
+
+      const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
 
     useEffect(() => {
         localStorage.setItem("darkMode", JSON.stringify(darkMode));
@@ -110,9 +127,10 @@ const updateQuantity = (productId: number, change: number) => {
         <div className="flex flex-col min-h-screen">
             <NavBar cartCount={cartCount} cartItems={cartItems} cartOpen={cartOpen} setCartOpen={setCartOpen}
                 removeFromCart={removeFromCart} wishlist={wishlist} toggleWishlist={toggleWishlist} addToCart={addToCart}
-                searchTerm={searchTerm} setSearchTerm={setSearchTerm} darkMode={darkMode} toggleDarkMode={toggleDarkMode}  updateQuantity={updateQuantity}/>
+                searchTerm={searchTerm} setSearchTerm={setSearchTerm} darkMode={darkMode} toggleDarkMode={toggleDarkMode} 
+                 updateQuantity={updateQuantity} user ={user} setUser={setUser} />
             <div className="flex-1 pt-16">
-                <Outlet context={{ addToCart, wishlist, toggleWishlist, searchTerm, darkMode }} />
+                <Outlet context={{ addToCart, wishlist, toggleWishlist, searchTerm, darkMode,user,setUser }} />
 
                 <Footer darkMode={darkMode} />
 

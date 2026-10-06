@@ -2,10 +2,33 @@
 import { Link, useOutletContext, } from "react-router-dom";
 import Shop from "./Shop";
 import ScrollAnimation from "../Components/ScrollAnimation";
+import { useState } from "react";
+import LoginCard from "../Components/LoginCard";
+
+interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
+interface HomeProps{
+    darkMode: boolean;
+    user: User | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
 
 function Home() {
 
-    const { darkMode } = useOutletContext<{ darkMode: boolean }>();
+    const { darkMode,user,setUser } = useOutletContext<HomeProps>();
+  const [loginModel, setLoginModel] = useState(() => {
+    return !sessionStorage.getItem("loginPopupShown");
+});
+
+const closeLoginModel = () => {
+    setLoginModel(false);
+    sessionStorage.setItem("loginPopupShown", "true");
+};
 
     return (
         <div
@@ -274,11 +297,24 @@ function Home() {
             >
                 PRODUCT OVERVIEW
             </p>
-
-
-          
-
             <Shop />
+
+            {!user && loginModel && (
+               <div className="fixed inset-0 z-[100] bg-black/60 flex justify-center items-center">
+                    <div className={`p-4 w-[300px] md:w-[450px] h-[350px] shadow-lg p-10 ${darkMode ? "bg-[#242424] text-white" : "bg-white text-black"}`}>
+
+                        <div className="flex justify-between items-start mb-4">
+                            <h2 className="text-[16px] md:text-[18px] font-semibold">Log in to enjoy a seamless shopping experience</h2>
+                            <button onClick={closeLoginModel} className="text-2xl cursor-pointer hover:opacity-70">
+                                &times;
+                            </button>
+                        </div>
+
+                        <LoginCard darkMode={darkMode} user={user} setUser={setUser} onClose={closeLoginModel}/>
+                    </div>
+
+                </div>
+            )}
 
         </div>
     );
